@@ -284,7 +284,7 @@
 
 		_setupTooltips() {
 			this.lengthTooltip = makeTooltip(
-				"Tokens aproximados (exclui system prompt).\nUsa tokenizador generico, pode diferir da contagem do Claude.\nInvalido apos compactacao de contexto.\nEscala: 200k tokens (limite maximo de contexto do Claude)."
+				"Tokens aproximados (exclui system prompt).\nUsa tokenizador genérico, pode diferir da contagem do Claude.\nInválido após compactação de contexto.\nEscala: 200k tokens (limite máximo de contexto do Claude)."
 			);
 			setupTooltip(
 				this.lengthGroup,
@@ -294,19 +294,19 @@
 
 			setupTooltip(
 				this.cachedDisplay,
-				makeTooltip("Mensagens enviadas enquanto em cache sao significativamente mais baratas."),
+				makeTooltip("Mensagens enviadas enquanto em cache são significativamente mais baratas."),
 				{ topOffset: 8 }
 			);
 
 			setupTooltip(
 				this.sessionGroup,
-				makeTooltip("Janela de sessao de 5 horas.\nA barra mostra seu uso.\nA linha marca onde voce esta na janela."),
+				makeTooltip("Janela de sessão de 5 horas.\nA barra mostra seu uso.\nA linha marca onde você está na janela."),
 				{ topOffset: 8 }
 			);
 
 			setupTooltip(
 				this.weeklyGroup,
-				makeTooltip("Janela de uso semanal (7 dias).\nA barra mostra seu uso.\nA linha marca onde voce esta na janela."),
+				makeTooltip("Janela de uso semanal (7 dias).\nA barra mostra seu uso.\nA linha marca onde você está na janela."),
 				{ topOffset: 8 }
 			);
 		}
@@ -399,7 +399,7 @@
 				this.lengthGroup.replaceChildren(this.lengthDisplay);
 				if (this.lengthTooltip) {
 					this.lengthTooltip.textContent =
-						"Tokens aproximados (exclui system prompt).\nUsa tokenizador generico, pode diferir da contagem do Claude.\nContagem invalida apos compactacao.";
+						"Tokens aproximados (exclui system prompt).\nUsa tokenizador genérico, pode diferir da contagem do Claude.\nContagem inválida após compactação.";
 				}
 			} else {
 				this.lengthDisplay.style.opacity = '';
@@ -476,7 +476,7 @@
 				this.sessionResetMs = session.resets_at ? Date.parse(session.resets_at) : null;
 				this.sessionWindowStartMs = this.sessionResetMs ? this.sessionResetMs - 5 * 60 * 60 * 1000 : null;
 				const resetText = this.sessionResetMs ? ` · reseta em ${formatResetCountdown(this.sessionResetMs)}` : '';
-				this.sessionUsageSpan.textContent = `Sessao: ${pct}%${resetText}`;
+				this.sessionUsageSpan.textContent = `Sessão: ${pct}%${resetText}`;
 
 				const width = Math.max(0, Math.min(100, rawPct));
 				this.sessionBarFill.style.width = `${width}%`;

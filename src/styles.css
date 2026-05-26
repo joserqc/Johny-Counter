@@ -121,6 +121,53 @@
 	cursor: help;
 }
 
+/* Nag banner */
+.jc-nag {
+	width: 100%;
+	padding: 4px 10px;
+	border-radius: 6px;
+	font-size: 11px;
+	line-height: 1.4;
+	text-align: center;
+	user-select: none;
+	opacity: 0;
+	animation: jc-nag-in 400ms ease forwards;
+	transition: background-color 300ms ease, color 300ms ease;
+}
+
+@keyframes jc-nag-in {
+	from { opacity: 0; transform: translateY(-4px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+.jc-nag--chill {
+	background: rgba(59, 130, 246, 0.12);
+	color: #3b82f6;
+}
+
+.jc-nag--warn {
+	background: rgba(245, 158, 11, 0.15);
+	color: #d97706;
+}
+
+.jc-nag--crit {
+	background: rgba(239, 68, 68, 0.15);
+	color: #ef4444;
+	font-weight: 600;
+}
+
+.jc-nag--over {
+	background: rgba(139, 0, 0, 0.2);
+	color: #dc2626;
+	font-weight: 700;
+	animation: jc-nag-in 400ms ease forwards, jc-nag-pulse 2s ease-in-out infinite;
+}
+
+@keyframes jc-nag-pulse {
+	0%, 100% { opacity: 1; }
+	50% { opacity: 0.6; }
+}
+
 /* Hide optional elements completely (no layout space) */
 .jc-hidden {
 	display: none !important;

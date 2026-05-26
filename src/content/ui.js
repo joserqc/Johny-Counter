@@ -125,6 +125,10 @@
 			this.weeklyWindowStartMs = null;
 			this.refreshingUsage = false;
 
+			this.nagBanner = null;
+			this.lastNagLevel = null;
+			this.lastNagIndex = -1;
+
 			this.domObserver = null;
 		}
 
@@ -257,6 +261,9 @@
 			this.weeklyGroup.appendChild(this.weeklyBar);
 			this.weeklyGroup.appendChild(this.weeklyUsageSpan);
 
+			this.nagBanner = document.createElement('div');
+			this.nagBanner.className = 'jc-nag jc-hidden';
+
 			this.usageLine.appendChild(this.sessionGroup);
 			this.usageLine.appendChild(this.weeklyGroup);
 
@@ -351,6 +358,9 @@
 			if (!toolbarRow) return;
 			if (toolbarRow.nextElementSibling !== this.usageLine) {
 				toolbarRow.after(this.usageLine);
+			}
+			if (this.nagBanner && this.usageLine.nextElementSibling !== this.nagBanner) {
+				this.usageLine.after(this.nagBanner);
 			}
 			this.refreshProgressChrome();
 		}
@@ -508,6 +518,53 @@
 			}
 
 			this._updateMarkers();
+			this._updateNag(session, weekly);
+		}
+
+		_getNagLevel(session, weekly) {
+			const sPct = session?.utilization ?? 0;
+			const wPct = weekly?.utilization ?? 0;
+			const peak = Math.max(sPct, wPct);
+			if (peak >= 99.5) return 'OVER';
+			if (peak >= 80) return 'CRIT';
+			if (peak >= 50) return 'WARN';
+			if (peak >= 30) return 'CHILL';
+			return null;
+		}
+
+		_pickNag(level) {
+			const pool = CC.NAGS[level];
+			if (!pool?.length) return null;
+			let idx;
+			if (pool.length === 1) {
+				idx = 0;
+			} else {
+				do { idx = Math.floor(Math.random() * pool.length); }
+				while (idx === this.lastNagIndex && this.lastNagLevel === level);
+			}
+			this.lastNagIndex = idx;
+			return pool[idx];
+		}
+
+		_updateNag(session, weekly) {
+			if (!this.nagBanner) return;
+			const level = this._getNagLevel(session, weekly);
+
+			if (!level) {
+				this.nagBanner.classList.add('jc-hidden');
+				this.lastNagLevel = null;
+				return;
+			}
+
+			if (level !== this.lastNagLevel) {
+				this.lastNagLevel = level;
+				const nag = this._pickNag(level);
+				if (!nag) return;
+
+				this.nagBanner.classList.remove('jc-hidden', 'jc-nag--chill', 'jc-nag--warn', 'jc-nag--crit', 'jc-nag--over');
+				this.nagBanner.classList.add(`jc-nag--${level.toLowerCase()}`);
+				this.nagBanner.textContent = `${nag.emoji} ${nag.text}`;
+			}
 		}
 
 		_updateMarkers() {

@@ -528,7 +528,7 @@
 			if (peak >= 99.5) return 'OVER';
 			if (peak >= 80) return 'CRIT';
 			if (peak >= 50) return 'WARN';
-			if (peak >= 30) return 'CHILL';
+			if (peak >= 15) return 'CHILL';
 			return null;
 		}
 

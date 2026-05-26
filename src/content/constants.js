@@ -43,16 +43,16 @@
 			{ emoji: '🎾', text: 'Match point, Johny! Hora de largar o prompt.' },
 		],
 		CRIT: [
-			{ emoji: '🚨', text: 'ALERTA JOHNY: Vai pro bar. Agora. E uma ordem judicial.' },
+			{ emoji: '🚨', text: 'ALERTA JOHNY: Vai pescar. Agora. E uma ordem judicial.' },
 			{ emoji: '🔥', text: 'Johny, o Claude precisa descansar e voce tambem.' },
 			{ emoji: '💀', text: 'Ate a OAB ia mandar voce parar, Doutor.' },
-			{ emoji: '🏖️', text: 'RECURSO NEGADO. Va pra praia, pesque, beba, viva.' },
+			{ emoji: '🏖️', text: 'RECURSO NEGADO. Va pra praia, pesque, descanse, viva.' },
 			{ emoji: '⛳', text: 'Hole in one no uso do Claude. Parabens, agora SAI.' },
 		],
 		OVER: [
-			{ emoji: '☠️', text: 'Johny esgotou tudo. Hora de abrir a cerveja e aceitar.' },
+			{ emoji: '☠️', text: 'Johny esgotou tudo. Larga o teclado e vai pro campo.' },
 			{ emoji: '🪦', text: 'Aqui jaz o limite do Johny. Descanse em paz (e va pescar).' },
-			{ emoji: '🍺', text: 'Acabou, Doutor. A defesa agora e no boteco.' },
+			{ emoji: '🎣', text: 'Acabou, Doutor. A proxima audiencia e com os peixes.' },
 		],
 	});
 })();
